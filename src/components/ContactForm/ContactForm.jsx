@@ -1,57 +1,50 @@
-import { Component } from 'react';
-
+import { useState } from 'react';
+//Components
 import Button from 'components/Button';
 import FormInput from 'components/FromInput/FormInput';
+//Styles
 import { StyledForm } from './ContactForm.styled';
+//Settings
+import {
+  INITIAL_STATE_FORM,
+  PATTERN_NAME,
+  PATTERN_NUMBER,
+} from 'settings/settings';
 
-const initialState = {
-  name: '',
-  number: '',
-};
+export default function ContactForm({ addContact }) {
+  const [contact, setContact] = useState(INITIAL_STATE_FORM);
 
-const patternName =
-  "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
-const patternNumber =
-  '+?d{1,4}?[ .-s]?(?d{1,3}?)?[ .-s]?d{1,4}[ .-s]?d{1,4}[ .-s]?d{1,9}';
-
-export default class ContactForm extends Component {
-  state = { ...initialState };
-
-  handleSubmit = evt => {
+  const handleSubmit = evt => {
     evt.preventDefault();
-    this.props.addContact({ ...this.state });
-    this.setState({ name: '', number: '' });
+    addContact(contact);
+    setContact(INITIAL_STATE_FORM);
   };
 
-  handleChange = evt => {
-    const { name, value } = evt.target;
-    this.setState({
-      [name]: value,
+  const handleChange = ({ target: { name, value } }) =>
+    setContact(prev => {
+      return { ...prev, [name]: value };
     });
-  };
 
-  render() {
-    return (
-      <StyledForm onSubmit={this.handleSubmit}>
-        <FormInput
-          type="text"
-          name="name"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          pattern={patternName}
-          value={this.state.name}
-          cbOnChange={this.handleChange}
-        />
-        <FormInput
-          type="tel"
-          name="number"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          pattern={patternNumber}
-          value={this.state.number}
-          cbOnChange={this.handleChange}
-        />
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <FormInput
+        type="text"
+        name="name"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        pattern={PATTERN_NAME}
+        value={contact.name}
+        cbOnChange={handleChange}
+      />
+      <FormInput
+        type="tel"
+        name="number"
+        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        pattern={PATTERN_NUMBER}
+        value={contact.number}
+        cbOnChange={handleChange}
+      />
 
-        <Button title="Add contact" />
-      </StyledForm>
-    );
-  }
+      <Button title="Add contact" />
+    </StyledForm>
+  );
 }
