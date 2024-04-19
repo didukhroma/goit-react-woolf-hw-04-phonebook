@@ -1,18 +1,21 @@
 import { useState } from 'react';
-//Components
+//COMPONENTS
 import Button from 'components/Button';
 import FormInput from 'components/FromInput/FormInput';
-//Styles
+//STYLES
 import { StyledForm } from './ContactForm.styled';
-//Settings
+//SETTINGS
 import {
   INITIAL_STATE_FORM,
   PATTERN_NAME,
   PATTERN_NUMBER,
 } from 'settings/settings';
+import { useGlobalContext } from 'context/GlobalProvider/GlobalProvider';
 
-export default function ContactForm({ addContact }) {
+export default function ContactForm() {
   const [contact, setContact] = useState(INITIAL_STATE_FORM);
+
+  const { addContact } = useGlobalContext();
 
   const handleSubmit = evt => {
     evt.preventDefault();

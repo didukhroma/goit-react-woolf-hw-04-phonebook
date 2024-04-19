@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom/client';
 
 import App from 'components/App';
 import './index.css';
+import GlobalProvider from 'context/GlobalProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <GlobalProvider>
+      <App />
+    </GlobalProvider>
   </React.StrictMode>
 );

@@ -1,11 +1,17 @@
+//COMPONENTS
 import FormInput from 'components/FromInput/FormInput';
+//CONTEXT
+import { useGlobalContext } from 'context/GlobalProvider/GlobalProvider';
+//STYLES
 import { StyledForm, StyledTitle } from './Filter.styled';
 
-function Filter({ cbOnChange, value }) {
+function Filter() {
+  const { handleChange, filter } = useGlobalContext();
+
   return (
     <StyledForm>
       <StyledTitle>Find contacts by name</StyledTitle>
-      <FormInput name="filter" value={value} cbOnChange={cbOnChange} />
+      <FormInput name="filter" value={filter} cbOnChange={handleChange} />
     </StyledForm>
   );
 }
