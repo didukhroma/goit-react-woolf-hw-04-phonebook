@@ -2,6 +2,8 @@ import { useState } from 'react';
 //COMPONENTS
 import Button from 'components/Button';
 import FormInput from 'components/FromInput/FormInput';
+//CONTEXT
+import { useGlobalContext } from 'context/GlobalProvider/GlobalProvider';
 //STYLES
 import { StyledForm } from './ContactForm.styled';
 //SETTINGS
@@ -10,7 +12,6 @@ import {
   PATTERN_NAME,
   PATTERN_NUMBER,
 } from 'settings/settings';
-import { useGlobalContext } from 'context/GlobalProvider/GlobalProvider';
 
 export default function ContactForm() {
   const [contact, setContact] = useState(INITIAL_STATE_FORM);
