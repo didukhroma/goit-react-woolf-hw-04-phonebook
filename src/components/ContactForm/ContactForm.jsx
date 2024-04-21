@@ -1,15 +1,10 @@
 import { useState } from 'react';
 //COMPONENTS
 import Button from 'components/Button';
-import FormInput from 'components/FromInput/FormInput';
 //SETTINGS
-import {
-  INITIAL_STATE_FORM,
-  PATTERN_NAME,
-  PATTERN_NUMBER,
-} from 'settings/settings';
+import { INITIAL_STATE_FORM } from 'settings/settings';
 //STYLES
-import { StyledForm } from './ContactForm.styled';
+import { StyledForm, StyledLabel } from './ContactForm.styled';
 
 export default function ContactForm({ addContact }) {
   const [contact, setContact] = useState(INITIAL_STATE_FORM);
@@ -27,22 +22,32 @@ export default function ContactForm({ addContact }) {
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <FormInput
-        type="text"
-        name="name"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        pattern={PATTERN_NAME}
-        value={contact.name}
-        cbOnChange={handleChange}
-      />
-      <FormInput
-        type="tel"
-        name="number"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        pattern={PATTERN_NUMBER}
-        value={contact.number}
-        cbOnChange={handleChange}
-      />
+      <StyledLabel>
+        <span>Name</span>
+        <input
+          name="name"
+          type="text"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          value={contact.name}
+          onChange={handleChange}
+          // eslint-disable-next-line no-useless-escape
+          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          required
+        />
+      </StyledLabel>
+      <StyledLabel>
+        <span>Number</span>
+        <input
+          name="number"
+          type="tel"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          value={contact.number}
+          onChange={handleChange}
+          // eslint-disable-next-line no-useless-escape
+          pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+          required
+        />
+      </StyledLabel>
 
       <Button title="Add contact" />
     </StyledForm>

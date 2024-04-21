@@ -46,23 +46,3 @@ export const INITIAL_STATE_FORM = {
   name: '',
   number: '',
 };
-
-/**
- * Description
- *
- * @type {string}
- * @example const PATTERN_NAME =
-  "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
- */
-export const PATTERN_NAME =
-  "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
-
-/**
- * Description
- *
- * @type {string}
- * @example const PATTERN_NUMBER =
-  '+?d{1,4}?[-.s]?(?d{1,3}?)?[-.s]?d{1,4}[-.s]?d{1,4}[-.s]?d{1,9}';
- */
-export const PATTERN_NUMBER =
-  '+?d{1,4}?[-.s]?(?d{1,3}?)?[-.s]?d{1,4}[-.s]?d{1,4}[-.s]?d{1,9}';

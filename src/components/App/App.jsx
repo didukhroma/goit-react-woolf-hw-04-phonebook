@@ -14,7 +14,7 @@ import { INITIAL_STATE_APP } from 'settings/settings';
 import { StyledMainTitle, StyledTitle } from './App.styled';
 
 export default function App() {
-  const [contacts, setContacts] = useState(WEB_API.getData());
+  const [contacts, setContacts] = useState(WEB_API.getData);
   const [filter, setFilter] = useState(INITIAL_STATE_APP.filter);
 
   useEffect(() => {
