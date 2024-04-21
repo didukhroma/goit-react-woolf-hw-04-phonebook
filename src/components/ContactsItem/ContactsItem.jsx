@@ -1,4 +1,6 @@
+//COMPONENTS
 import Button from 'components/Button';
+//STYLES
 import { StyledLi, StyledP, StyledSpan } from './ContactsItem.styled';
 
 function ContactsItem({ name, number, id, cbOnClick }) {

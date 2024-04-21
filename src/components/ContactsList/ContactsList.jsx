@@ -1,11 +1,9 @@
+//COMPONENTS
 import ContactsItem from 'components/ContactsItem';
+//STYLES
 import { StyledList } from './ContactsList.styled';
-import { useGlobalContext } from 'context/GlobalProvider/GlobalProvider';
 
-function ContactsList() {
-  const { filteredContacts, deleteContact } = useGlobalContext();
-  const contacts = filteredContacts();
-
+function ContactsList({ contacts, deleteContact }) {
   return (
     <StyledList>
       {contacts.map(({ id, name, number }) => (

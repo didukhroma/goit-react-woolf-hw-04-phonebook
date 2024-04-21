@@ -1,4 +1,6 @@
+//HELPERS
 import capitalize from 'helpers/capitalize';
+//STYLES
 import { StyledLabel, StyledInput } from './FormInput.styled';
 
 function FormInput({ type, name, title, pattern, value, cbOnChange }) {
