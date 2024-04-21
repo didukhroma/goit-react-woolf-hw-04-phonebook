@@ -1,11 +1,13 @@
-const getData = key => {
-  const data = localStorage.getItem(key);
-  if (!data || !JSON.parse(data).length) return null;
+import { LOCAL_STORAGE_KEY } from 'settings/settings';
+
+const getData = () => {
+  const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+  if (!data || !JSON.parse(data).length) return [];
   return JSON.parse(data);
 };
 
-const setData = (key, data) => {
-  localStorage.setItem(key, JSON.stringify(data));
+const setData = data => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
 };
 
 const WEB_API = { getData, setData };

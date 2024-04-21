@@ -1,33 +1,24 @@
 import { useEffect, useState } from 'react';
-import isEqual from 'lodash.isequal';
 // COMPONENTS
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactsList from 'components/ContactsList';
 import Container from 'components/Container';
+import Notification from 'components/Notification';
 //HELPERS
 import WEB_API from 'helpers/localStorage';
 import generateID from 'helpers/generateID';
 //SETTINGS
-import { INITIAL_STATE_APP, LOCAL_STORAGE_KEY } from 'settings/settings';
+import { INITIAL_STATE_APP } from 'settings/settings';
 //STYLES
 import { StyledMainTitle, StyledTitle } from './App.styled';
 
 export default function App() {
-  const [contacts, setContacts] = useState(INITIAL_STATE_APP.contacts);
+  const [contacts, setContacts] = useState(WEB_API.getData());
   const [filter, setFilter] = useState(INITIAL_STATE_APP.filter);
 
   useEffect(() => {
-    const data = WEB_API.getData(LOCAL_STORAGE_KEY);
-    if (
-      data &&
-      isEqual(contacts, INITIAL_STATE_APP.contacts) &&
-      !isEqual(data, INITIAL_STATE_APP.contacts)
-    ) {
-      setContacts(data);
-    } else {
-      WEB_API.setData(LOCAL_STORAGE_KEY, contacts);
-    }
+    WEB_API.setData(contacts);
   }, [contacts]);
 
   const addContact = contact => {
@@ -60,6 +51,7 @@ export default function App() {
       <StyledTitle>Contacts</StyledTitle>
       <Filter filter={filter} handleChange={handleChangeFilter} />
       <ContactsList contacts={filteredContacts} deleteContact={deleteContact} />
+      {!contacts.length && <Notification />}
     </Container>
   );
 }
